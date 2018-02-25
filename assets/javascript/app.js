@@ -1,26 +1,23 @@
-//Create Variables
-var timer = 30;
-var correctAnswers = 0;
-var incorrectAnswers = 0;
-var unanswered = 0;
-var intervalId;
+$(document).ready(function () {
 
-//Create Questions/Answers
+  //Create Variables
+  var timer = 30;
+  var correctAnswers = 0;
+  var incorrectAnswers = 0;
+  var unanswered = 0;
+  var intervalId;
 
-var questions = ["What breakfast cereal was Sonny the Cuckoo Bird 'cuckoo for'?", "What is the most popular Super Bowl food?", "What food is Philadephia Known For?", "What is the San Francisco Treat?", "What beverage is like brunch in a cup?"];
+  //Create Reset
+  function resetGame() {
+    var timer = 30;
+    var correctAnswers = 0;
+    var incorrectAnswers = 0;
+    var unanswered = 0;
+  }
 
-var answers = ["Fruit Loops", "Captain Crunch", "Cocoa Puffs", "Cinnamon Toast Crunch"], ["Nachos", "Pizza", "Mozzerella Sticks", "Chicken Wings"], ["Pizza", "Cheesesteak", "Lasagna", "Bell Peppers"], ["Rice-a-roni", "Mac-n-cheese", "Brownies", "Donuts"], ["Milkshake", "Smoothie", "Bloody Mary", "Mimosa"];
-
-var correctAnswers = ["Cocoa Puffs", "Chicken Wings", "Cheesesteak", "Rice-a-roni", "Bloddy Mary"];
-
-
-
-//Set timer
-// function decrement() {
-
-  function run() {
-    //Clear the intervalId first to allow multiple instances
-    clearInterval(intervalId);
+  //Set timer
+  function runTimer() {
+    // clearInterval(intervalId);
     intervalId = setInterval(decrement, 1000);
   }
 
@@ -43,23 +40,60 @@ var correctAnswers = ["Cocoa Puffs", "Chicken Wings", "Cheesesteak", "Rice-a-ron
     clearInterval(intervalId);
   }
 
-  run();
+  runTimer();
 
+  //Create Questions/Answers
 
+  var questionOne = {
+    question: "What breakfast cereal was Sonny the Cuckoo Bird 'cuckoo for'?",
+    answers: ["Fruit Loops", "Captain Crunch", "Cocoa Puffs", "Cinnamon Toast Crunch"],
+    correctAnswer: "Cocoa Puffs"
+  };
 
-  
+  $('#question').text(questionOne.question);
+  $('#answerA').text(questionOne.answers[0]);
+  $('#answerB').text(questionOne.answers[1]);
+  $('#answerC').text(questionOne.answers[2]);
+  $('#answerD').text(questionOne.answers[3]);
 
-  // if (timer === 0) {
+  var questionTwo = {
+    question: "What is the most popular Super Bowl food?",
+    answers: ["Nachos", "Pizza", "Mozzerella Sticks", "Chicken Wings"],
+    correctAnswer: "Chicken Wings"
+  }
 
-  //   stop();
+  var questionThree = {
+    question: "What food is Philadephia Known For?",
+    answers: ["Pizza", "Cheesesteak", "Lasagna", "Bell Peppers"],
+    correctAnswer: "Cheesesteak"
+
+  }
+
+  var questionFour = {
+    question: "What is the San Francisco Treat?",
+    answers: ["Rice-a-roni", "Mac-n-cheese", "Brownies", "Donuts"],
+    correctAnswer: "Rice-a-roni"
+  }
+
+  var questionFive = {
+    question: "What beverage is like brunch in a cup?",
+    answers: ["Milkshake", "Smoothie", "Bloody Mary", "Mimosa"],
+    correctAnswer: "Bloody Mary"
+  }
+
+  //set 
+  // if (questionOne.answers === questionOne.correctAnswer) {
+  //   correctAnswers++;
+  //   alert("You are right!");
+  // } else if {
+  //   alert("You are wrong!");
   // }
 
+  //Create event listener for hover
 
-//  = setInterval(decrement, 1000);
+  //Create event listener for when an answer is clicked
 
-//Create event listener for hover
-
-//Create event listener for when an answer is clicked
-
+  //Show final results
 
 
+});
