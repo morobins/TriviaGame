@@ -42,7 +42,7 @@ $(document).ready(function () {
 
   runTimer();
 
-  //Create Questions/Answers
+  //Create Questions/Answers/Results
 
   var questionOne = {
     question: "What breakfast cereal was Sonny the Cuckoo Bird 'cuckoo for'?",
@@ -80,6 +80,10 @@ $(document).ready(function () {
     answers: ["Milkshake", "Smoothie", "Bloody Mary", "Mimosa"],
     correctAnswer: "Bloody Mary"
   }
+
+  var trivia = [questionOne, questionTwo, questionThree, questionFour, questionFive];
+
+  var resultImages = ["../assets/images/cocoa_puffs.jpg", "../assets/images/chicken_wings.jpg","../assets/images/cheesesteak.jpeg","../assets/images/rice_a_roni.jpg","../assets/images/bloody_mary.jpg"];
 
   //Create event listener for hover
   $("button").mouseenter(function(){

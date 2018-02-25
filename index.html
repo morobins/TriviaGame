@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,18 +8,29 @@
   <link rel="stylesheet" href="./assets/css/style.css">
   <title>Yummy Trivia</title>
 </head>
+
 <body>
   <h1>Food Trivia Game</h1>
 
   <div id='timer'></div>
   <br>
   <br>
-  <div id='question'></div>
-  <div><button id='answerA'></button></div>
-  <div><button id='answerB'></button></div>
-  <div><button id='answerC'></button></div>
-  <div><button id='answerD'></button></div>
-
+  <div id='trivia'>
+    <div id='question'></div>
+    <div>
+      <button id='answerA'></button>
+    </div>
+    <div>
+      <button id='answerB'></button>
+    </div>
+    <div>
+      <button id='answerC'></button>
+    </div>
+    <div>
+      <button id='answerD'></button>
+    </div>
+  </div>
+  <div id='correct-answer'></div>
   <div id='correct-answers'></div>
   <div id='incorrect-answers'></div>
   <div id='unanswered'></div>
@@ -26,4 +38,5 @@
   <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
   <script src="./assets/javascript/app.js"></script>
 </body>
+
 </html>
