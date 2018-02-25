@@ -31,7 +31,6 @@ $(document).ready(function () {
 
       stop();
 
-      alert("Time Up!");
     }
   }
 
@@ -85,6 +84,9 @@ $(document).ready(function () {
 
   var resultImages = ["../assets/images/cocoa_puffs.jpg", "../assets/images/chicken_wings.jpg","../assets/images/cheesesteak.jpeg","../assets/images/rice_a_roni.jpg","../assets/images/bloody_mary.jpg"];
 
+  //Show question and possible answers
+  // $('#trivia').text(trivia[i]);
+
   //Create event listener for hover
   $("button").mouseenter(function(){
     $(this).css("background-color", "red");
@@ -95,6 +97,8 @@ $(document).ready(function () {
   });
 
   //Create event listener for when an answer is clicked
+  //If correct answer guessed, hide incorrect answers and show results image
+  //If incorrect answer guessed keep time running until 0 or correct answer is picked
 $("button").on("click", function(){
     if (questionOne.answers === questionOne.correctAnswer) {
     correctAnswers++;
