@@ -81,19 +81,24 @@ $(document).ready(function () {
     correctAnswer: "Bloody Mary"
   }
 
-  //set 
-  // if (questionOne.answers === questionOne.correctAnswer) {
-  //   correctAnswers++;
-  //   alert("You are right!");
-  // } else if {
-  //   alert("You are wrong!");
-  // }
-
   //Create event listener for hover
+  $("button").mouseenter(function(){
+    $(this).css("background-color", "red");
+  });
+
+  $("button").mouseleave(function(){
+      $(this).css("backgound-color", "white");
+  });
 
   //Create event listener for when an answer is clicked
+$("button").on("click", function(){
+    if (questionOne.answers === questionOne.correctAnswer) {
+    correctAnswers++;
+    alert("You are right!");
+  } else {
+    alert("You are wrong!"); 
+  }
+});
 
   //Show final results
-
-
 });
