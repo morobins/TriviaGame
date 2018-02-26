@@ -1,0 +1,11 @@
+body {
+  background-image: url("../images/food.png");
+  text-align: center;
+}
+
+.answer-button {
+  margin: 10px auto;
+  background-color: lightblue;
+  border-color: aliceblue;
+  color: #fff;
+}

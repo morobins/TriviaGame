@@ -15,6 +15,8 @@ $(document).ready(function () {
     var unanswered = 0;
   }
 
+  //Add on click for a start button so timer doesn't start on load
+
   //Set timer
   function runTimer() {
     // clearInterval(intervalId);
@@ -88,13 +90,13 @@ $(document).ready(function () {
   // $('#trivia').text(trivia[i]);
 
   //Create event listener for hover
-  $("button").mouseenter(function(){
-    $(this).css("background-color", "red");
-  });
+  // $("button").mouseenter(function(){
+  //   $(this).css("background-color", "red");
+  // });
 
-  $("button").mouseleave(function(){
-      $(this).css("backgound-color", "white");
-  });
+  // $("button").mouseleave(function(){
+  //     $(this).css("backgound-color", "white");
+  // });
 
   //Create event listener for when an answer is clicked
   //If correct answer guessed, hide incorrect answers and show results image
