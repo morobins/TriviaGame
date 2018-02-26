@@ -1,6 +1,7 @@
 body {
   background-image: url("../images/food.png");
   text-align: center;
+  font-family: 'Crafty Girls', cursive;
 }
 
 .answer-button {
