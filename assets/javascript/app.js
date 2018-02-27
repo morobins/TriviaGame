@@ -2,6 +2,7 @@ $(document).ready(function () {
 
   //Create Variables
   var timer = 30;
+  var userGuess = [];
   var correctAnswers = 0;
   var incorrectAnswers = 0;
   var unanswered = 0;
@@ -84,12 +85,24 @@ $(document).ready(function () {
 
   var trivia = [questionOne, questionTwo, questionThree, questionFour, questionFive];
 
+  var counter = 0
+  function displayQuestion () {
+    var currentQuestion = trivia[counter]
+    $('#question').text(currentQuestion.question);
+    $('#answerA').text(currentQuestion.answers[0]);
+    $('#answerB').text(currentQuestion.answers[1]);
+    $('#answerC').text(currentQuestion.answers[2]);
+    $('#answerD').text(currentQuestion.answers[3]);
+  }
+  counter++
+
   var resultImages = ["../assets/images/cocoa_puffs.jpg", "../assets/images/chicken_wings.jpg","../assets/images/cheesesteak.jpeg","../assets/images/rice_a_roni.jpg","../assets/images/bloody_mary.jpg"];
 
   //Show question and possible answers
   // $('#trivia').text(trivia[i]);
 
   //Create event listener for hover
+  // $("button").button('toggle');
   // $("button").mouseenter(function(){
   //   $(this).css("background-color", "red");
   // });
@@ -102,12 +115,15 @@ $(document).ready(function () {
   //If correct answer guessed, hide incorrect answers and show results image
   //If incorrect answer guessed keep time running until 0 or correct answer is picked
 $("button").on("click", function(){
-    if (questionOne.answers === questionOne.correctAnswer) {
+  $(this).val()
+    if (currentQuestion.answer[i] === currentQuestion.correctAnswer) {
     correctAnswers++;
     alert("You are right!");
   } else {
     alert("You are wrong!"); 
   }
+
+  // $('#answerA').text(questionOne.answers[0]).val(questionOne.answers[0]);
 });
 
   //Show final results
