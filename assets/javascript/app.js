@@ -121,10 +121,10 @@ $("button").on("click", function(){
   console.log(userGuess);
     if (userGuess === currentQuestion.correctAnswer) {
     correctAnswers++;
-    alert("You are right!");
     //show result screen
   // } else {
     counter++;
+    displayQuestion();
    //else show correct answer
   }
 
