@@ -87,7 +87,7 @@ $(document).ready(function () {
 
   var counter = 0
   function displayQuestion () {
-    var currentQuestion = trivia[counter]
+    currentQuestion = trivia[counter]
     $('#question').text(currentQuestion.question);
     $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]);
     $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]);
@@ -118,13 +118,14 @@ $(document).ready(function () {
   //If incorrect answer guessed keep time running until 0 or correct answer is picked
 $("button").on("click", function(){
   var userGuess = ($(this).attr("data-value"));
-  // $(this).val()
   console.log(userGuess);
     if (userGuess === currentQuestion.correctAnswer) {
     correctAnswers++;
     alert("You are right!");
-  } else {
-    alert("You are wrong!"); 
+    //show result screen
+  // } else {
+    counter++;
+   //else show correct answer
   }
 
   // $('#answerA').text(questionOne.answers[0]).val(questionOne.answers[0]);
