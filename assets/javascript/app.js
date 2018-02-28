@@ -52,11 +52,11 @@ $(document).ready(function () {
     correctAnswer: "Cocoa Puffs"
   };
 
-  $('#question').text(questionOne.question);
-  $('#answerA').text(questionOne.answers[0]);
-  $('#answerB').text(questionOne.answers[1]);
-  $('#answerC').text(questionOne.answers[2]);
-  $('#answerD').text(questionOne.answers[3]);
+  // $('#question').text(questionOne.question);
+  // $('#answerA').text(questionOne.answers[0]);
+  // $('#answerB').text(questionOne.answers[1]);
+  // $('#answerC').text(questionOne.answers[2]);
+  // $('#answerD').text(questionOne.answers[3]);
 
   var questionTwo = {
     question: "What is the most popular Super Bowl food?",
@@ -89,12 +89,14 @@ $(document).ready(function () {
   function displayQuestion () {
     var currentQuestion = trivia[counter]
     $('#question').text(currentQuestion.question);
-    $('#answerA').text(currentQuestion.answers[0]);
-    $('#answerB').text(currentQuestion.answers[1]);
-    $('#answerC').text(currentQuestion.answers[2]);
-    $('#answerD').text(currentQuestion.answers[3]);
+    $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]);
+    $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]);
+    $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]);
+    $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]);
   }
-  counter++
+
+
+  displayQuestion();
 
   var resultImages = ["../assets/images/cocoa_puffs.jpg", "../assets/images/chicken_wings.jpg","../assets/images/cheesesteak.jpeg","../assets/images/rice_a_roni.jpg","../assets/images/bloody_mary.jpg"];
 
@@ -116,7 +118,8 @@ $(document).ready(function () {
   //If incorrect answer guessed keep time running until 0 or correct answer is picked
 $("button").on("click", function(){
   $(this).val()
-    if (currentQuestion.answer[i] === currentQuestion.correctAnswer) {
+  console.log($(this).val());
+    if ($(this).val() === currentQuestion.correctAnswer) {
     correctAnswers++;
     alert("You are right!");
   } else {
