@@ -2,7 +2,7 @@ $(document).ready(function () {
 
   //Create Variables
   var timer = 30;
-  var userGuess = [];
+  // var userGuess = [];
   var correctAnswers = 0;
   var incorrectAnswers = 0;
   var unanswered = 0;
@@ -117,9 +117,10 @@ $(document).ready(function () {
   //If correct answer guessed, hide incorrect answers and show results image
   //If incorrect answer guessed keep time running until 0 or correct answer is picked
 $("button").on("click", function(){
-  $(this).val()
-  console.log($(this).val());
-    if ($(this).val() === currentQuestion.correctAnswer) {
+  var userGuess = ($(this).attr("data-value"));
+  // $(this).val()
+  console.log(userGuess);
+    if (userGuess === currentQuestion.correctAnswer) {
     correctAnswers++;
     alert("You are right!");
   } else {
