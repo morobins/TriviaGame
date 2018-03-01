@@ -10,3 +10,7 @@ body {
   border-color: aliceblue;
   color: #fff;
 }
+
+.buttons-hidden{
+  display: none;
+}

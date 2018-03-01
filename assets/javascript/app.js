@@ -16,6 +16,7 @@ $(document).ready(function () {
     var unanswered = 0;
   }
 
+
   //Add on click for a start button so timer doesn't start on load
   $('#start-game').on("click", function() {
     $(this).hide();
@@ -92,12 +93,15 @@ $(document).ready(function () {
 
   var counter = 0
   function displayQuestion () {
+
     currentQuestion = trivia[counter]
     $('#question').text(currentQuestion.question);
-    $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]);
-    $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]);
-    $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]);
-    $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]);
+    //try to dynamically add the buttons
+    // $('.answerButtons').html('<button type="button" type="radio" class="btn btn-primary btn-lg btn-block answer-button" id="answerA">').attr("data-value", currentQuestion.answers[0]);
+    $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]).removeClass("buttons-hidden");
+    $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]).removeClass("buttons-hidden");
+    $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
+    $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
   }
 
 
