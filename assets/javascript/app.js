@@ -17,6 +17,11 @@ $(document).ready(function () {
   }
 
   //Add on click for a start button so timer doesn't start on load
+  $('#start-game').on("click", function() {
+    $(this).hide();
+    runTimer();
+    displayQuestion();
+  });
 
   //Set timer
   function runTimer() {
@@ -42,7 +47,7 @@ $(document).ready(function () {
     clearInterval(intervalId);
   }
 
-  runTimer();
+
 
   //Create Questions/Answers/Results
 
@@ -96,7 +101,7 @@ $(document).ready(function () {
   }
 
 
-  displayQuestion();
+  // displayQuestion();
 
   var resultImages = ["../assets/images/cocoa_puffs.jpg", "../assets/images/chicken_wings.jpg","../assets/images/cheesesteak.jpeg","../assets/images/rice_a_roni.jpg","../assets/images/bloody_mary.jpg"];
 
