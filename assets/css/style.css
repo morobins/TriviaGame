@@ -14,3 +14,7 @@ body {
 .buttons-hidden{
   display: none;
 }
+
+img {
+  width: 500px;
+}
