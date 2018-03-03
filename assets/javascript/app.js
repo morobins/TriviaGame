@@ -22,15 +22,7 @@ $(document).ready(function () {
     displayQuestion();
   });
 
-  function unansweredQuestion() {
-    $('.answer-button').hide();
-    $('#timer').text("Times Up!");
-    $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-    $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
-    unanswered++;
-    stop();
-    setTimeout(nextQuestion, 3000);
-  }
+
   //Set timer
   function runTimer() {
     // clearInterval(intervalId);
@@ -104,7 +96,10 @@ $(document).ready(function () {
   }
 
   function nextQuestion() {
-    $('#correct-answer').empty();
+    if (counter === trivia.length - 1) {
+      results();
+    } else {
+     $('#correct-answer').empty();
     $('#question').show();
     $('#img-holder').empty();
     $('.answer-button').show();
@@ -112,7 +107,18 @@ $(document).ready(function () {
     timer = 10;
     counter++;
     displayQuestion();
+    }
   };
+
+  function unansweredQuestion() {
+    $('.answer-button').hide();
+    $('#timer').text("Times Up!");
+    $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+    $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
+    unanswered++;
+    stop();
+    setTimeout(nextQuestion, 3000);
+  }
 
   //What occurs when the right answer is clicked
   function correct() {
@@ -133,6 +139,18 @@ $(document).ready(function () {
     $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
     stop();
     setTimeout(nextQuestion, 3000);
+  }
+
+  function results () {
+  $('#timer').hide();
+  $('#question').hide();
+  $('.answer-button').hide();
+  $("#correct-answer").hide();
+  $('#img-holder').hide();
+  $('#correct-answers').text("You got " + correctAnswers + " right!");
+  $('#incorrect-answers').text("You got " + incorrectAnswers + " wrong!");
+  $('#unanswered').text(unanswered + " were unanswered!");
+  setTimeout(nextQuestion, 3000);
   }
 
   //Create event listener for when an answer is clicked
@@ -163,15 +181,7 @@ $(document).ready(function () {
 
   });
 
-  //Show final results
-  // $('#timer').hide();
-  // $('#question').hide();
-  // $('.answer-button').hide();
-  // $("#correct-answer").hide();
-  // $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-  // $('#correct-answers').text(correctAnswers);
-  // $('#incorrect-answers').text(incorrectAnswers);
-  // $('#unanswered').text(unanswered);
+
 
   //NEED HELP
 
