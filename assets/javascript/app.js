@@ -6,9 +6,15 @@ $(document).ready(function () {
   var correctAnswers = 0;
   var incorrectAnswers = 0;
   var unanswered = 0;
-  // var intervalId;
+  var intervalId;
 
-
+  //Create Reset
+  function resetGame() {
+    timer = 10;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    unanswered = 0;
+  }
 
   //Add on click for a start button so timer doesn't start on load
   $('#start-game').on("click", function () {
@@ -24,7 +30,7 @@ $(document).ready(function () {
     $("#timer").text("Time Remaining:" + " " + timer);
 
     if (timer === 0) {
-      stop();
+      // stop();
       unansweredQuestion();
     }
   }
@@ -79,7 +85,6 @@ $(document).ready(function () {
     // debugger;
     console.log(trivia[counter])
     currentQuestion = trivia[counter];
-    intervalId = setInterval(runTimer, 1000);
     $('#question').show();
     $('.answer-button').show();
     $('#timer').show();
@@ -89,7 +94,7 @@ $(document).ready(function () {
     $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
     $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
     // counter++;
-   
+    intervalId = setInterval(runTimer, 1000);
     // runTimer();
   }
 
@@ -97,44 +102,43 @@ $(document).ready(function () {
     if (counter === trivia.length - 1) {
       results();
     } else {
-      stop();
-      timer = 10;
       $('#correct-answer').empty();
       $('#question').show();
       $('#img-holder').empty();
       $('.answer-button').show();
       $('#timer').show();
-      displayQuestion();
+      timer = 10;
       counter++;
-      
+      displayQuestion();
     }
   };
 
   function unansweredQuestion() {
-    stop();
     $('.answer-button').hide();
     $('#timer').text("Times Up!");
+    $("#correct-answer").show();
+    $('#img-holder').show();
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
     unanswered++;
-    setTimeout(nextQuestion, 1500);
+    stop();
+    setTimeout(nextQuestion, 3000);
   }
 
   //What occurs when the right answer is clicked
   function correct() {
-    stop();
     $('button').hide();
     $("#correct-answer").show();
     $('#img-holder').show();
     $("#correct-answer").html("Good Job! The Answer is " + currentQuestion.correctAnswer);
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-    $('#question').hide(); 
-    setTimeout(nextQuestion, 1500);
+    $('#question').hide();
+    stop();
+    setTimeout(nextQuestion, 3000);
   }
 
   //What occurs when the wrong answer is clicked
   function incorrect() {
-    stop();
     $('.answer-button').hide();
     $('#timer').hide();
     $('#question').hide();
@@ -142,7 +146,8 @@ $(document).ready(function () {
     $('#img-holder').show();
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
-    setTimeout(nextQuestion, 1500);
+    stop();
+    setTimeout(nextQuestion, 3000);
   }
 
   function results() {
@@ -151,7 +156,7 @@ $(document).ready(function () {
     $('.answer-button').hide();
     $("#correct-answer").hide();
     $('#img-holder').hide();
-    $('#correct-answers').show()
+    $('#correct-answers').show();
     $('#incorrect-answers').show();
     $('#unanswered').show();
     $('#correct-answers').text("You got " + correctAnswers + " right!");
@@ -187,7 +192,7 @@ $(document).ready(function () {
     if (userGuess === currentQuestion.correctAnswer) {
       correctAnswers++;
       correct();
-      console.log("You got " + correctAnswers + " answers correct!");
+      console.log("You got " + correctAnswers + "answers correct!");
     } else {
       incorrectAnswers++;
       incorrect();
