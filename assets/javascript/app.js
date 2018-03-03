@@ -16,7 +16,6 @@ $(document).ready(function () {
     var unanswered = 0;
   }
 
-
   //Add on click for a start button so timer doesn't start on load
   $('#start-game').on("click", function () {
     $(this).hide();
@@ -24,18 +23,19 @@ $(document).ready(function () {
     displayQuestion();
   });
 
+  function unanswered() {
+    $('.answer-button').hide();
+    $('#timer').text("Times Up!");
+    $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+    $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
+    unanswered++;
+    stop();
+    setTimeout(nextQuestion, 3000);
+  }
   //Set timer
   function runTimer() {
     // clearInterval(intervalId);
-    intervalId = setInterval(decrement, 1000);
-  }
-
-
-
-  function decrement() {
-
     timer--;
-
     $("#timer").text("Time Remaining:" + " " + timer);
 
     if (timer === 0) {
@@ -49,10 +49,7 @@ $(document).ready(function () {
     clearInterval(intervalId);
   }
 
-  
-
   //Create Questions/Answers/Results
-
   var questionOne = {
     question: "What breakfast cereal was Sonny the Cuckoo Bird 'cuckoo for'?",
     answers: ["Fruit Loops", "Captain Crunch", "Cocoa Puffs", "Cinnamon Toast Crunch"],
@@ -93,7 +90,6 @@ $(document).ready(function () {
 
   var counter = 0
 
-
   function displayQuestion() {
     currentQuestion = trivia[counter];
     $('#question').text(currentQuestion.question);
@@ -102,45 +98,40 @@ $(document).ready(function () {
     $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
     $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
     counter++;
+    intervalId = setInterval(runTimer, 1000);
+    runTimer();
   }
 
-
-  function nextQuestion () {
+  function nextQuestion() {
     $('#correct-answer').empty();
     $('#question').show();
     $('#img-holder').empty();
     $('.answer-button').show();
-    runTimer();
-   timer = 10;
-   displayQuestion();
-  //  counter++;
- 
-
+    $('#timer').show();
+    timer = 10;
+    displayQuestion();
   };
-  
-function unanswered() {
-  $('.answer-button').hide();
-  $('#timer').text("Times Up!");
-  $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-  $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
-  unanswered++;
-  setTimeout(nextQuestion, 3000);
-}
 
-function incorrect() {
-  $('.answer-button').hide();
-  $('#timer').hide();
-  $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-  $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
-  unanswered++;
-  setTimeout(nextQuestion, 3000);
-}
+  //What occurs when the right answer is clicked
+  function correct() {
+    $('button').hide();
+    $("#correct-answer").html("Good Job! The Answer is " + currentQuestion.correctAnswer);
+    $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+    $('#question').hide();
+    stop();
+    setTimeout(nextQuestion, 3000);
+  }
 
-
-
-
-
-  // displayQuestion();
+  //What occurs when the wrong answer is clicked
+  function incorrect() {
+    $('.answer-button').hide();
+    $('#timer').hide();
+    $('#question').hide();
+    $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+    $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
+    stop();
+    setTimeout(nextQuestion, 3000);
+  }
 
   //Create event listener for when an answer is clicked
   //If correct answer guessed, hide incorrect answers and show results image
@@ -151,58 +142,41 @@ function incorrect() {
     console.log(userGuess);
     // stop();
     if (userGuess === currentQuestion.correctAnswer) {
-      $('button').hide();
       correctAnswers++;
-      $("#correct-answer").html("Good Job! The Answer is " + currentQuestion.correctAnswer);
-      $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-      $('#question').hide();
-      stop();
-      setTimeout(nextQuestion, 3000);
+      correct();
+      console.log("You got " + correctAnswers + "answers correct!");
+    } else {
+      incorrectAnswers++;
+      incorrect();
+      console.log("You got " + incorrectAnswers + " answers wrong!");
     }
 
-      // } else {
-      // incorrect();
-      // }
-      // // $("#answerButtons").hide();
-      // $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
-      //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-      //   displayQuestion();
-      //   incorrectAnswers++
-   
-      
-      // } else if (unanswered++) { 
-      //   $("#answerButtons").hide();
-      //   $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
-      //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-      //   nextQuestion();
-      //   }
-      
-  
-  
-   
-
-
+    // } else if (unanswered++) { 
+    //   $("#answerButtons").hide();
+    //   $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
+    //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+    //   nextQuestion();
+    //   }
 
 
   });
 
   //Show final results
+  // $('#timer').hide();
+  // $('#question').hide();
+  // $('.answer-button').hide();
+  // $("#correct-answer").hide();
+  // $('#img-holder').html('<img src="' + currentQuestion.image + '">');
   // $('#correct-answers').text(correctAnswers);
   // $('#incorrect-answers').text(incorrectAnswers);
   // $('#unanswered').text(unanswered);
 
   //NEED HELP
-  // pause in btween questions and/or the questions disappearing so the correct answer shows before new question loads
+
   // timer has a Delay
   // witing the final results at end of Game
-  // if/else statements
-  // if time=0 go to next question
-});
+  //wrong answer on first 
+  //unanswered function
 
-  //try to dynamically add the buttons
-    // $('#answerButtons').html('<button type="button radio" class="btn btn-primary btn-lg btn-block answer-button">').attr("data-value", currentQuestion.answers[i]);
-    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[0]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[0]);
-    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[1]).addClass("btn btn-primary btn-lg btn-block answer-button").textConten(currentQuestion.answers[1]);
-    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[2]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[2]);
-    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[3]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[3]);
-    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[4]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[4]);
+
+});
