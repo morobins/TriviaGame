@@ -154,6 +154,9 @@ $(document).ready(function () {
     $('.answer-button').hide();
     $("#correct-answer").hide();
     $('#img-holder').hide();
+    $('#correct-answers').show()
+    $('#incorrect-answers').show();
+    $('#unanswered').show();
     $('#correct-answers').text("You got " + correctAnswers + " right!");
     $('#incorrect-answers').text("You got " + incorrectAnswers + " wrong!");
     $('#unanswered').text(unanswered + " were unanswered!");
