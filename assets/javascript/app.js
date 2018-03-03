@@ -30,6 +30,8 @@ $(document).ready(function () {
     intervalId = setInterval(decrement, 1000);
   }
 
+
+
   function decrement() {
 
     timer--;
@@ -37,12 +39,8 @@ $(document).ready(function () {
     $("#timer").text("Time Remaining:" + " " + timer);
 
     if (timer === 0) {
-      // $('#answerButtons').hide();
-      $('#timer').text("Times Up!");
-      // $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-
       stop();
-
+      unanswered();
     }
   }
 
@@ -51,7 +49,7 @@ $(document).ready(function () {
     clearInterval(intervalId);
   }
 
-
+  
 
   //Create Questions/Answers/Results
 
@@ -95,23 +93,51 @@ $(document).ready(function () {
 
   var counter = 0
 
+
   function displayQuestion() {
-    timer = 10;
     currentQuestion = trivia[counter];
     $('#question').text(currentQuestion.question);
-    //try to dynamically add the buttons
-    // $('.answerButtons').html('<button type="button" type="radio" class="btn btn-primary btn-lg btn-block answer-button" id="answerA">').attr("data-value", currentQuestion.answers[0]);
     $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]).removeClass("buttons-hidden");
     $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]).removeClass("buttons-hidden");
     $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
     $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
-    // setTimeout(displayQuestion, 3000);
+    counter++;
   }
 
-  // for ( var i = 0; i < trivia.length; i++) {
-  //   displayQuestion();
 
-  // }
+  function nextQuestion () {
+    $('#correct-answer').empty();
+    $('#question').show();
+    $('#img-holder').empty();
+    $('.answer-button').show();
+    runTimer();
+   timer = 10;
+   displayQuestion();
+  //  counter++;
+ 
+
+  };
+  
+function unanswered() {
+  $('.answer-button').hide();
+  $('#timer').text("Times Up!");
+  $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+  $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
+  unanswered++;
+  setTimeout(nextQuestion, 3000);
+}
+
+function incorrect() {
+  $('.answer-button').hide();
+  $('#timer').hide();
+  $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+  $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
+  unanswered++;
+  setTimeout(nextQuestion, 3000);
+}
+
+
+
 
 
   // displayQuestion();
@@ -125,27 +151,35 @@ $(document).ready(function () {
     console.log(userGuess);
     // stop();
     if (userGuess === currentQuestion.correctAnswer) {
+      $('button').hide();
       correctAnswers++;
       $("#correct-answer").html("Good Job! The Answer is " + currentQuestion.correctAnswer);
       $('#img-holder').html('<img src="' + currentQuestion.image + '">');
+      $('#question').hide();
+      stop();
+      setTimeout(nextQuestion, 3000);
+    }
 
-      //   } else if (userGuess !== currentQuestion.correctAnswer) {
-      //   $("#answerButtons").hide();
-      //   $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
+      // } else {
+      // incorrect();
+      // }
+      // // $("#answerButtons").hide();
+      // $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
       //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
       //   displayQuestion();
       //   incorrectAnswers++
-
-      // } else if (timer = 0) { 
+   
+      
+      // } else if (unanswered++) { 
       //   $("#answerButtons").hide();
       //   $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
       //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-      //   displayQuestion();
-      //   unanswered++
+      //   nextQuestion();
       //   }
-      counter++;
-      displayQuestion();
-    }
+      
+  
+  
+   
 
 
 
@@ -164,3 +198,11 @@ $(document).ready(function () {
   // if/else statements
   // if time=0 go to next question
 });
+
+  //try to dynamically add the buttons
+    // $('#answerButtons').html('<button type="button radio" class="btn btn-primary btn-lg btn-block answer-button">').attr("data-value", currentQuestion.answers[i]);
+    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[0]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[0]);
+    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[1]).addClass("btn btn-primary btn-lg btn-block answer-button").textConten(currentQuestion.answers[1]);
+    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[2]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[2]);
+    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[3]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[3]);
+    // $('#answerButtons').html('<button>').attr("data-value", currentQuestion.answers[4]).addClass("btn btn-primary btn-lg btn-block answer-button").textContent(currentQuestion.answers[4]);
