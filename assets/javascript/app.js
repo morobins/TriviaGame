@@ -10,10 +10,10 @@ $(document).ready(function () {
 
   //Create Reset
   function resetGame() {
-    var timer = 20;
-    var correctAnswers = 0;
-    var incorrectAnswers = 0;
-    var unanswered = 0;
+    timer = 10;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    unanswered = 0;
   }
 
   //Add on click for a start button so timer doesn't start on load
@@ -85,6 +85,9 @@ $(document).ready(function () {
     // debugger;
     console.log(trivia[counter])
     currentQuestion = trivia[counter];
+    $('#question').show();
+    $('.answer-button').show();
+    $('#timer').show();
     $('#question').text(currentQuestion.question);
     $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]).removeClass("buttons-hidden");
     $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]).removeClass("buttons-hidden");
@@ -99,14 +102,14 @@ $(document).ready(function () {
     if (counter === trivia.length - 1) {
       results();
     } else {
-     $('#correct-answer').empty();
-    $('#question').show();
-    $('#img-holder').empty();
-    $('.answer-button').show();
-    $('#timer').show();
-    timer = 10;
-    counter++;
-    displayQuestion();
+      $('#correct-answer').empty();
+      $('#question').show();
+      $('#img-holder').empty();
+      $('.answer-button').show();
+      $('#timer').show();
+      timer = 10;
+      counter++;
+      displayQuestion();
     }
   };
 
@@ -123,6 +126,8 @@ $(document).ready(function () {
   //What occurs when the right answer is clicked
   function correct() {
     $('button').hide();
+    $("#correct-answer").show();
+    $('#img-holder').show();
     $("#correct-answer").html("Good Job! The Answer is " + currentQuestion.correctAnswer);
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $('#question').hide();
@@ -135,23 +140,41 @@ $(document).ready(function () {
     $('.answer-button').hide();
     $('#timer').hide();
     $('#question').hide();
+    $("#correct-answer").show();
+    $('#img-holder').show();
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
     stop();
     setTimeout(nextQuestion, 3000);
   }
 
-  function results () {
-  $('#timer').hide();
-  $('#question').hide();
-  $('.answer-button').hide();
-  $("#correct-answer").hide();
-  $('#img-holder').hide();
-  $('#correct-answers').text("You got " + correctAnswers + " right!");
-  $('#incorrect-answers').text("You got " + incorrectAnswers + " wrong!");
-  $('#unanswered').text(unanswered + " were unanswered!");
-  setTimeout(nextQuestion, 3000);
+  function results() {
+    $('#timer').hide();
+    $('#question').hide();
+    $('.answer-button').hide();
+    $("#correct-answer").hide();
+    $('#img-holder').hide();
+    $('#correct-answers').text("You got " + correctAnswers + " right!");
+    $('#incorrect-answers').text("You got " + incorrectAnswers + " wrong!");
+    $('#unanswered').text(unanswered + " were unanswered!");
+    // setTimeout(nextQuestion, 3000);
+    $('#end-game').show();
+    console.log(timer);
   }
+
+  function restartGame() {
+    // timer = 10;
+    correctAnswers = 0;
+    incorrectAnswers = 0;
+    unanswered = 0;
+    counter = 0;
+    $('#correct-answers').hide();
+    $('#incorrect-answers').hide();
+    $('#unanswered').hide();
+    clearInterval(intervalId);
+    displayQuestion();
+  }
+
 
   //Create event listener for when an answer is clicked
   //If correct answer guessed, hide incorrect answers and show results image
@@ -171,12 +194,10 @@ $(document).ready(function () {
       console.log("You got " + incorrectAnswers + " answers wrong!");
     }
 
-    // } else if (unanswered++) { 
-    //   $("#answerButtons").hide();
-    //   $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
-    //   $('#img-holder').html('<img src="' + currentQuestion.image + '">');
-    //   nextQuestion();
-    //   }
+    $('#end-game').on("click", function () {
+      $(this).hide();
+      restartGame();
+    });
 
 
   });
