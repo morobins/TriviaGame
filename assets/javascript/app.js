@@ -19,11 +19,10 @@ $(document).ready(function () {
   //Add on click for a start button so timer doesn't start on load
   $('#start-game').on("click", function () {
     $(this).hide();
-    runTimer();
     displayQuestion();
   });
 
-  function unanswered() {
+  function unansweredQuestion() {
     $('.answer-button').hide();
     $('#timer').text("Times Up!");
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
@@ -39,8 +38,8 @@ $(document).ready(function () {
     $("#timer").text("Time Remaining:" + " " + timer);
 
     if (timer === 0) {
-      stop();
-      unanswered();
+      // stop();
+      unansweredQuestion();
     }
   }
 
@@ -91,15 +90,17 @@ $(document).ready(function () {
   var counter = 0
 
   function displayQuestion() {
+    // debugger;
+    console.log(trivia[counter])
     currentQuestion = trivia[counter];
     $('#question').text(currentQuestion.question);
     $('#answerA').text(currentQuestion.answers[0]).attr("data-value", currentQuestion.answers[0]).removeClass("buttons-hidden");
     $('#answerB').text(currentQuestion.answers[1]).attr("data-value", currentQuestion.answers[1]).removeClass("buttons-hidden");
     $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
     $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
-    counter++;
+    // counter++;
     intervalId = setInterval(runTimer, 1000);
-    runTimer();
+    // runTimer();
   }
 
   function nextQuestion() {
@@ -109,6 +110,7 @@ $(document).ready(function () {
     $('.answer-button').show();
     $('#timer').show();
     timer = 10;
+    counter++;
     displayQuestion();
   };
 
@@ -136,7 +138,7 @@ $(document).ready(function () {
   //Create event listener for when an answer is clicked
   //If correct answer guessed, hide incorrect answers and show results image
   //If incorrect answer guessed keep time running until 0 or correct answer is picked
-  $("button").on("click", function () {
+  $(".answer-button").on("click", function () {
 
     var userGuess = ($(this).attr("data-value"));
     console.log(userGuess);
@@ -175,8 +177,7 @@ $(document).ready(function () {
 
   // timer has a Delay
   // witing the final results at end of Game
-  //wrong answer on first 
-  //unanswered function
+
 
 
 });
