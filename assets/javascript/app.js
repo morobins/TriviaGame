@@ -114,6 +114,7 @@ $(document).ready(function () {
   };
 
   function unansweredQuestion() {
+    $('#question').hide();
     $('.answer-button').hide();
     $('#timer').text("Times Up!");
     $("#correct-answer").show();
