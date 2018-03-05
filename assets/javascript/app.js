@@ -26,8 +26,9 @@ $(document).ready(function () {
   //Set timer
   function runTimer() {
     // clearInterval(intervalId);
-    timer--;
     $("#timer").text("Time Remaining:" + " " + timer);
+    timer--;
+    
 
     if (timer === 0) {
       // stop();
@@ -83,6 +84,9 @@ $(document).ready(function () {
 
   function displayQuestion() {
     // debugger;
+    console.log(timer);
+    timer = 10;
+    intervalId = setInterval(runTimer, 1000);
     console.log(trivia[counter])
     currentQuestion = trivia[counter];
     $('#question').show();
@@ -94,7 +98,7 @@ $(document).ready(function () {
     $('#answerC').text(currentQuestion.answers[2]).attr("data-value", currentQuestion.answers[2]).removeClass("buttons-hidden");
     $('#answerD').text(currentQuestion.answers[3]).attr("data-value", currentQuestion.answers[3]).removeClass("buttons-hidden");
     // counter++;
-    intervalId = setInterval(runTimer, 1000);
+    
     // runTimer();
   }
 
@@ -102,14 +106,16 @@ $(document).ready(function () {
     if (counter === trivia.length - 1) {
       results();
     } else {
-      $('#correct-answer').empty();
-      $('#question').show();
-      $('#img-holder').empty();
-      $('.answer-button').show();
-      $('#timer').show();
       timer = 10;
+      $('#correct-answer').empty();
+      // $('#question').show();
+      $('#img-holder').empty();
+      // $('.answer-button').show();
+      // $('#timer').show();
       counter++;
-      displayQuestion();
+      clearInterval(intervalId);
+      $("#timer").text("Time Remaining:" + " " + timer);
+      displayQuestion();    
     }
   };
 
@@ -123,7 +129,7 @@ $(document).ready(function () {
     $("#correct-answer").html("The Correct Answer is " + currentQuestion.correctAnswer);
     unanswered++;
     stop();
-    setTimeout(nextQuestion, 3000);
+    setTimeout(nextQuestion, 1500);
   }
 
   //What occurs when the right answer is clicked
@@ -135,7 +141,7 @@ $(document).ready(function () {
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $('#question').hide();
     stop();
-    setTimeout(nextQuestion, 3000);
+    setTimeout(nextQuestion, 1500);
   }
 
   //What occurs when the wrong answer is clicked
@@ -148,7 +154,7 @@ $(document).ready(function () {
     $('#img-holder').html('<img src="' + currentQuestion.image + '">');
     $("#correct-answer").html("Guess Again! The Correct Answer is " + currentQuestion.correctAnswer);
     stop();
-    setTimeout(nextQuestion, 3000);
+    setTimeout(nextQuestion, 1500);
   }
 
   function results() {
@@ -169,7 +175,9 @@ $(document).ready(function () {
   }
 
   function restartGame() {
-    // timer = 10;
+    clearInterval(intervalId);
+    timer = 10;
+    $("#timer").text("Time Remaining:" + " " + timer);
     correctAnswers = 0;
     incorrectAnswers = 0;
     unanswered = 0;
@@ -177,7 +185,6 @@ $(document).ready(function () {
     $('#correct-answers').hide();
     $('#incorrect-answers').hide();
     $('#unanswered').hide();
-    clearInterval(intervalId);
     displayQuestion();
   }
 
